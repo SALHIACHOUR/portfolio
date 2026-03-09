@@ -62,9 +62,17 @@ export default function Hero() {
                     {words.map((w, i) => (
                         <motion.span
                             key={i}
-                            variants={word}
+                            initial={{ opacity: 0, y: 40 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{
+                                duration: 0.5,
+                                ease: "easeOut",
+                                delay: 0.3 + i * 0.08,
+                            }}
                             className={`inline-block mr-[0.25em] ${
-                                w === "backend" || w === "scale." ? "text-blue-400" : "text-white"
+                                w === "backend" || w === "scale."
+                                    ? "text-blue-400"
+                                    : "text-white"
                             }`}
                         >
                             {w}

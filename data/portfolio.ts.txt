@@ -1,0 +1,62 @@
+export const portfolioData = {
+  name: "SALHI Achour",
+  title: "Senior Java Software & Cloud Engineer",
+  email: "salhiachour98@gmail.com",
+  phone: "+212 762 185558",
+  linkedin: "https://linkedin.com/in/achour-salhi",
+  location: "Casablanca, Maroc",
+  summary: "Développeur Backend avec 4+ ans d'expérience en Java (Spring Boot) et API REST...",
+
+  skills: {
+    backend: ["Spring Boot 2.x–3.x", "Hibernate", "REST APIs", "JUnit", "Maven", "Swagger"],
+    frontend: ["Angular 11–17", "Next.js", "TypeScript", "Bootstrap"],
+    devops: ["Docker", "Jenkins", "Grafana", "Prometheus", "GitLab CI/CD", "AWS", "GCP", "ArgoCD"],
+    languages: ["Java", "Python", "TypeScript", "JavaScript", "C#"],
+  },
+
+  experiences: [
+    {
+      title: "Consultant Technologie Java/Spring-boot",
+      company: "Niji Maroc",
+      period: "09/2025 – Présent",
+      location: "Casablanca",
+      description: [
+        "Conception et architecture d'APIs REST et microservices Spring Boot",
+        "Industrialisation et optimisation des pipelines CI/CD",
+        "Analyse, résolution et prévention des incidents de production",
+      ],
+      tech: ["Java 17+", "Spring Boot 3/4", "Spring Cloud", "Docker", "ArgoCD", "AWS"],
+    },
+    // ... ATOZ SERVICES, KAPISOFT
+  ],
+
+  projects: [
+    {
+      name: "Application Artisan–Client",
+      period: "07/2023 – 06/2024",
+      description: "Application Web-Mobile de mise en relation Artisan–Client avec monitoring temps réel.",
+      tech: ["Spring Boot", "Jenkins", "Grafana", "Prometheus", "PostgreSQL", "FCM"],
+    },
+    {
+      name: "Plateforme Pièces Automobiles",
+      period: "11/2023 – 04/2024",
+      description: "Plateforme de vente avec microservices backend et gestion de fichiers AWS S3.",
+      tech: ["Spring Boot", "AWS S3", "GitLab CI/CD", "PostgreSQL"],
+    },
+  ],
+
+  education: [
+    {
+      degree: "Ingénieur en Informatique",
+      school: "ENSIAS",
+      period: "09/2018 – 06/2021",
+      location: "Rabat, Maroc",
+    },
+  ],
+
+  certifications: [
+    "Building Web Applications with Java Spring Boot",
+    "Intelligence Artificielle & IA Générative",
+    "Big Data Engineer - Mastery Award 2021",
+  ],
+};

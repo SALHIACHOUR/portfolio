@@ -1,72 +1,156 @@
 "use client";
+
 import { motion } from "framer-motion";
-import { Github, Linkedin, Mail, MapPin } from "lucide-react";
+import { ArrowUpRight, Github, Linkedin } from "lucide-react";
 import { portfolioData } from "@/data/portfolio";
 
+const sentence = {
+    hidden: { opacity: 0 },
+    visible: {
+        opacity: 1,
+        transition: { staggerChildren: 0.08, delayChildren: 0.3 },
+    },
+};
+
+const word = {
+    hidden: { opacity: 0, y: 40 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } },
+};
+
+const words = ["I", "build", "backend", "systems", "that", "scale."];
+
 export default function Hero() {
-    const { name, title, summary, email, linkedin, github, location } = portfolioData;
+    const { name, email, linkedin, github } = portfolioData;
 
     return (
-        <section id="about" className="min-h-screen flex items-center justify-center px-6 pt-20">
-            <div className="max-w-4xl text-center">
-                <motion.div
-                    initial={{ opacity: 0, y: 30 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6 }}
+        <section
+            id="about"
+            className="min-h-screen flex flex-col justify-between px-6 md:px-16 pt-32 pb-12 max-w-7xl mx-auto"
+        >
+            {/* Top block */}
+            <div className="flex items-start justify-between">
+                {/* Left — label */}
+                <motion.p
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.5 }}
+                    className="text-slate-500 text-sm tracking-widest uppercase font-medium"
                 >
-                    <div className="inline-flex items-center gap-2 bg-blue-500/10 border border-blue-500/20 text-blue-400 text-sm px-4 py-2 rounded-full mb-6">
-                        <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
-                        Disponible pour de nouvelles opportunités
-                    </div>
+                    Senior Java & Cloud Engineer
+                </motion.p>
 
-                    <h1 className="text-5xl md:text-7xl font-bold mb-4">
-                        <span className="text-white">{name.split(" ")[0]} </span>
-                        <span className="text-blue-400">{name.split(" ")[1]}</span>
-                    </h1>
-
-                    <p className="text-xl md:text-2xl text-slate-400 font-medium mb-6">{title}</p>
-                    <p className="text-slate-500 max-w-2xl mx-auto mb-4 leading-relaxed">{summary}</p>
-
-                    <div className="flex items-center justify-center gap-2 text-slate-500 text-sm mb-10">
-                        <MapPin size={14} />
-                        <span>{location}</span>
-                    </div>
-
-                    <div className="flex items-center justify-center gap-4 flex-wrap">
-                        <a
-                            href={linkedin}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="flex items-center gap-2 bg-blue-600 hover:bg-blue-500 text-white px-6 py-3 rounded-xl font-medium transition-all hover:scale-105"
-                        >
-                            <Linkedin size={18} /> LinkedIn
-                        </a>
-                        <a
-                            href={github}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="flex items-center gap-2 bg-slate-800 hover:bg-slate-700 text-white px-6 py-3 rounded-xl font-medium transition-all hover:scale-105"
-                        >
-                            <Github size={18} /> GitHub
-                        </a>
-                        <a
-                            href={`mailto:${email}`}
-                            className="flex items-center gap-2 border border-slate-700 hover:border-blue-500 text-slate-300 hover:text-blue-400 px-6 py-3 rounded-xl font-medium transition-all"
-                        >
-                            <Mail size={18} /> Email
-                        </a>
-                    </div>
-                </motion.div>
-
+                {/* Right — availability badge */}
                 <motion.div
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ delay: 1, duration: 1 }}
-                    className="mt-20 text-slate-600 animate-bounce text-2xl"
+                    initial={{ opacity: 0, x: 20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.5 }}
+                    className="flex items-center gap-2 text-sm text-slate-400 border border-slate-800 rounded-full px-4 py-2"
                 >
-                    ↓
+                    <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
+                    Open to work
                 </motion.div>
             </div>
+
+            {/* Center — Big headline */}
+            <div className="mt-20 md:mt-0 flex-1 flex flex-col justify-center">
+                <motion.h1
+                    variants={sentence}
+                    initial="hidden"
+                    animate="visible"
+                    className="text-[clamp(3rem,10vw,8rem)] font-bold leading-[1.0] tracking-tight text-white"
+                >
+                    {words.map((w, i) => (
+                        <motion.span
+                            key={i}
+                            variants={word}
+                            className={`inline-block mr-[0.25em] ${
+                                w === "backend" || w === "scale." ? "text-blue-400" : "text-white"
+                            }`}
+                        >
+                            {w}
+                        </motion.span>
+                    ))}
+                </motion.h1>
+
+                {/* Sub line */}
+                <motion.p
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 1, duration: 0.6 }}
+                    className="text-slate-500 text-lg md:text-xl mt-8 max-w-xl leading-relaxed"
+                >
+                    Java · Spring Boot · Microservices · Cloud · CI/CD
+                    <br />
+                    <span className="text-slate-600 text-base">
+            4+ ans d&apos;expérience en production — Casablanca, Maroc
+          </span>
+                </motion.p>
+
+                {/* CTAs */}
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 1.2, duration: 0.6 }}
+                    className="flex items-center gap-4 mt-10 flex-wrap"
+                >
+                    <a
+                        href="#projects"
+                        className="group flex items-center gap-2 bg-white text-slate-950 font-semibold px-6 py-3 rounded-full hover:bg-blue-400 transition-all duration-300"
+                    >
+                        Voir mes projets
+                        <ArrowUpRight
+                            size={18}
+                            className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"
+                        />
+                    </a>
+                    <a
+                        href={`mailto:${email}`}
+                        className="flex items-center gap-2 border border-slate-700 text-slate-400 hover:text-white hover:border-slate-500 font-medium px-6 py-3 rounded-full transition-all duration-300"
+                    >
+                        Me contacter
+                    </a>
+                </motion.div>
+            </div>
+
+            {/* Bottom bar */}
+            <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 1.5, duration: 0.8 }}
+                className="flex items-center justify-between mt-16 pt-6 border-t border-slate-800"
+            >
+                {/* Name */}
+                <p className="text-slate-600 text-sm font-medium">{name}</p>
+
+                {/* Social links */}
+                <div className="flex items-center gap-6">
+                    <a
+                        href={linkedin}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-1.5 text-slate-500 hover:text-blue-400 text-sm transition-colors"
+                    >
+                        <Linkedin size={15} /> LinkedIn
+                    </a>
+                    <a
+                        href={github}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-1.5 text-slate-500 hover:text-blue-400 text-sm transition-colors"
+                    >
+                        <Github size={15} /> GitHub
+                    </a>
+                </div>
+
+                {/* Scroll hint */}
+                <motion.div
+                    animate={{ y: [0, 6, 0] }}
+                    transition={{ repeat: Infinity, duration: 1.5 }}
+                    className="text-slate-700 text-sm hidden md:block"
+                >
+                    scroll ↓
+                </motion.div>
+            </motion.div>
         </section>
     );
 }

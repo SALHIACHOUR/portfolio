@@ -1,92 +1,112 @@
 "use client";
+
 import { motion } from "framer-motion";
-import { Briefcase, MapPin } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import { portfolioData } from "@/data/portfolio";
 
 export default function Experience() {
     return (
-        <section id="experience" className="py-24 px-6 bg-slate-900/30">
-            <div className="max-w-4xl mx-auto">
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                >
-                    <h2 className="text-3xl font-bold text-white mb-2">Expérience</h2>
-                    <div className="w-12 h-1 bg-blue-500 rounded mb-12" />
-                </motion.div>
+        <section id="experience" className="px-6 md:px-16 py-24 max-w-7xl mx-auto">
+            {/* Section header */}
+            <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                className="flex items-end justify-between mb-4"
+            >
+                <h2 className="text-slate-500 text-sm tracking-widest uppercase font-medium">
+                    Expérience professionnelle
+                </h2>
+                <span className="text-slate-700 text-sm font-mono">
+          {String(portfolioData.experiences.length).padStart(2, "0")}
+        </span>
+            </motion.div>
 
-                <div className="relative">
-                    {/* Timeline line */}
-                    <div className="absolute left-6 top-0 bottom-0 w-px bg-slate-800" />
-
-                    <div className="space-y-10">
-                        {portfolioData.experiences.map((exp, i) => (
-                            <motion.div
-                                key={i}
-                                initial={{ opacity: 0, x: -20 }}
-                                whileInView={{ opacity: 1, x: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ delay: i * 0.15, duration: 0.5 }}
-                                className="relative pl-16"
-                            >
-                                {/* Dot */}
-                                <div
-                                    className={`absolute left-4 top-1 w-4 h-4 rounded-full border-2 ${
-                                        exp.current
-                                            ? "bg-blue-500 border-blue-400 shadow-lg shadow-blue-500/30"
-                                            : "bg-slate-700 border-slate-600"
-                                    }`}
-                                />
-
-                                <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6 hover:border-slate-700 transition-colors">
-                                    <div className="flex flex-wrap items-start justify-between gap-2 mb-3">
-                                        <div>
-                                            <h3 className="text-white font-bold text-lg">{exp.title}</h3>
-                                            <div className="flex items-center gap-3 mt-1">
-                        <span className="flex items-center gap-1 text-blue-400 text-sm font-medium">
-                          <Briefcase size={13} /> {exp.company}
-                        </span>
-                                                <span className="flex items-center gap-1 text-slate-500 text-sm">
-                          <MapPin size={13} /> {exp.location}
-                        </span>
-                                            </div>
-                                        </div>
-                                        <span
-                                            className={`text-xs px-3 py-1 rounded-full ${
-                                                exp.current
-                                                    ? "bg-green-500/10 text-green-400 border border-green-500/20"
-                                                    : "bg-slate-800 text-slate-400"
-                                            }`}
-                                        >
-                      {exp.period}
-                    </span>
-                                    </div>
-
-                                    <ul className="space-y-1 mb-4">
-                                        {exp.description.map((d, j) => (
-                                            <li key={j} className="text-slate-400 text-sm flex gap-2">
-                                                <span className="text-blue-500 mt-1">▸</span>
-                                                <span>{d}</span>
-                                            </li>
-                                        ))}
-                                    </ul>
-
-                                    <div className="flex flex-wrap gap-2">
-                                        {exp.tech.map((t) => (
-                                            <span
-                                                key={t}
-                                                className="text-xs bg-slate-800 text-slate-400 px-2 py-1 rounded-md"
-                                            >
-                        {t}
-                      </span>
-                                        ))}
-                                    </div>
+            {/* Experience list */}
+            <div>
+                {portfolioData.experiences.map((exp, i) => (
+                    <motion.div
+                        key={i}
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: i * 0.1, duration: 0.5 }}
+                        className="group border-t border-slate-800 py-10 grid md:grid-cols-[1fr_2fr] gap-8 hover:border-blue-500/40 transition-all duration-300"
+                    >
+                        {/* Left — meta */}
+                        <div className="flex md:flex-col gap-4 md:gap-3">
+                            {/* Number + company */}
+                            <div className="flex items-start gap-4">
+                <span className="text-slate-700 font-mono text-sm pt-1 shrink-0">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                                <div>
+                                    <p className="text-white font-semibold group-hover:text-blue-400 transition-colors">
+                                        {exp.company}
+                                    </p>
+                                    <p className="text-slate-600 text-xs mt-1">{exp.location}</p>
                                 </div>
-                            </motion.div>
-                        ))}
-                    </div>
-                </div>
+                            </div>
+
+                            {/* Period */}
+                            <span
+                                className={`self-start text-xs px-3 py-1 rounded-full border ${
+                                    exp.current
+                                        ? "border-green-500/30 text-green-400 bg-green-500/10"
+                                        : "border-slate-800 text-slate-500 bg-slate-900"
+                                }`}
+                            >
+                {exp.period}
+              </span>
+                        </div>
+
+                        {/* Right — content */}
+                        <div>
+                            {/* Title */}
+                            <h3 className="text-white text-xl md:text-2xl font-bold mb-5 flex items-center gap-2">
+                                {exp.title}
+                                {exp.current && (
+                                    <ArrowUpRight
+                                        size={18}
+                                        className="text-blue-400 opacity-0 group-hover:opacity-100 transition-opacity"
+                                    />
+                                )}
+                            </h3>
+
+                            {/* Description bullets */}
+                            <ul className="space-y-3 mb-6">
+                                {exp.description.map((d, j) => (
+                                    <motion.li
+                                        key={j}
+                                        initial={{ opacity: 0, x: -10 }}
+                                        whileInView={{ opacity: 1, x: 0 }}
+                                        viewport={{ once: true }}
+                                        transition={{ delay: i * 0.1 + j * 0.05 }}
+                                        className="flex gap-3 text-slate-400 text-sm leading-relaxed"
+                                    >
+                                        <span className="text-blue-500 shrink-0 mt-1">▸</span>
+                                        <span>{d}</span>
+                                    </motion.li>
+                                ))}
+                            </ul>
+
+                            {/* Tech stack */}
+                            <div className="flex flex-wrap gap-2">
+                                {exp.tech.map((t) => (
+                                    <span
+                                        key={t}
+                                        className="text-xs text-slate-500 border border-slate-800 group-hover:border-slate-700 px-3 py-1 rounded-full transition-colors"
+                                    >
+                    {t}
+                  </span>
+                                ))}
+                            </div>
+                        </div>
+                    </motion.div>
+                ))}
+
+                {/* Bottom border */}
+                <div className="border-t border-slate-800" />
             </div>
         </section>
     );

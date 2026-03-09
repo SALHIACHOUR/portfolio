@@ -1,81 +1,99 @@
 "use client";
+
 import { motion } from "framer-motion";
-import { GraduationCap, Award } from "lucide-react";
 import { portfolioData } from "@/data/portfolio";
 
 export default function Education() {
     return (
-        <section className="py-24 px-6 bg-slate-900/30">
-            <div className="max-w-4xl mx-auto">
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                >
-                    <h2 className="text-3xl font-bold text-white mb-2">Formation & Certifications</h2>
-                    <div className="w-12 h-1 bg-blue-500 rounded mb-12" />
-                </motion.div>
+        <section id="education" className="px-6 md:px-16 py-24 max-w-7xl mx-auto">
+            <div className="grid md:grid-cols-2 gap-16">
 
-                <div className="grid md:grid-cols-2 gap-8">
-                    {/* Education */}
-                    <div>
-                        <h3 className="text-slate-400 uppercase text-xs tracking-widest font-semibold mb-6 flex items-center gap-2">
-                            <GraduationCap size={14} /> Formation
-                        </h3>
-                        <div className="space-y-4">
-                            {portfolioData.education.map((edu, i) => (
-                                <motion.div
-                                    key={i}
-                                    initial={{ opacity: 0, x: -10 }}
-                                    whileInView={{ opacity: 1, x: 0 }}
-                                    viewport={{ once: true }}
-                                    transition={{ delay: i * 0.1 }}
-                                    className="bg-slate-900 border border-slate-800 rounded-xl p-4"
-                                >
-                                    <p className="text-white font-semibold">{edu.degree}</p>
-                                    <p className="text-blue-400 text-sm mt-1">{edu.school}</p>
-                                    <p className="text-slate-500 text-xs mt-1">
-                                        {edu.period} · {edu.location}
-                                    </p>
-                                </motion.div>
-                            ))}
-                        </div>
-                    </div>
+                {/* Left — Formation */}
+                <div>
+                    <motion.h2
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        className="text-slate-500 text-sm tracking-widest uppercase font-medium mb-4"
+                    >
+                        Formation
+                    </motion.h2>
 
+                    {portfolioData.education.map((edu, i) => (
+                        <motion.div
+                            key={i}
+                            initial={{ opacity: 0, y: 15 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ delay: i * 0.1 }}
+                            className="border-t border-slate-800 py-8 hover:border-slate-700 transition-colors group"
+                        >
+                            <p className="text-slate-600 text-xs font-mono mb-3">{edu.period}</p>
+                            <h3 className="text-white font-bold text-lg group-hover:text-blue-400 transition-colors">
+                                {edu.degree}
+                            </h3>
+                            <p className="text-slate-500 text-sm mt-1">{edu.school}</p>
+                            <p className="text-slate-700 text-xs mt-1">{edu.location}</p>
+                        </motion.div>
+                    ))}
+                    <div className="border-t border-slate-800" />
+                </div>
+
+                {/* Right — Certifications + Languages */}
+                <div>
                     {/* Certifications */}
-                    <div>
-                        <h3 className="text-slate-400 uppercase text-xs tracking-widest font-semibold mb-6 flex items-center gap-2">
-                            <Award size={14} /> Certifications
-                        </h3>
-                        <div className="space-y-3">
-                            {portfolioData.certifications.map((cert, i) => (
-                                <motion.div
-                                    key={i}
-                                    initial={{ opacity: 0, x: 10 }}
-                                    whileInView={{ opacity: 1, x: 0 }}
-                                    viewport={{ once: true }}
-                                    transition={{ delay: i * 0.1 }}
-                                    className="bg-slate-900 border border-slate-800 rounded-xl p-4 flex items-center gap-3"
-                                >
-                                    <span className="w-2 h-2 rounded-full bg-blue-400 shrink-0" />
-                                    <span className="text-slate-300 text-sm">{cert}</span>
-                                </motion.div>
-                            ))}
-                        </div>
+                    <motion.h2
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        className="text-slate-500 text-sm tracking-widest uppercase font-medium mb-4"
+                    >
+                        Certifications
+                    </motion.h2>
 
-                        {/* Languages */}
-                        <h3 className="text-slate-400 uppercase text-xs tracking-widest font-semibold mt-8 mb-4">
-                            Langues
-                        </h3>
-                        <div className="space-y-2">
-                            {portfolioData.languages.map((l, i) => (
-                                <div key={i} className="flex items-center justify-between bg-slate-900 border border-slate-800 rounded-xl px-4 py-3">
-                                    <span className="text-white text-sm font-medium">{l.lang}</span>
-                                    <span className="text-slate-500 text-xs">{l.level}</span>
-                                </div>
-                            ))}
-                        </div>
-                    </div>
+                    {portfolioData.certifications.map((cert, i) => (
+                        <motion.div
+                            key={i}
+                            initial={{ opacity: 0, y: 15 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ delay: i * 0.08 }}
+                            className="border-t border-slate-800 py-5 flex items-center gap-4 group hover:border-slate-700 transition-colors"
+                        >
+              <span className="text-slate-700 font-mono text-xs shrink-0">
+                {String(i + 1).padStart(2, "0")}
+              </span>
+                            <span className="text-slate-300 text-sm group-hover:text-white transition-colors">
+                {cert}
+              </span>
+                        </motion.div>
+                    ))}
+                    <div className="border-t border-slate-800 mb-12" />
+
+                    {/* Languages */}
+                    <motion.h2
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        className="text-slate-500 text-sm tracking-widest uppercase font-medium mb-4"
+                    >
+                        Langues
+                    </motion.h2>
+
+                    {portfolioData.languages.map((l, i) => (
+                        <motion.div
+                            key={i}
+                            initial={{ opacity: 0, y: 10 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ delay: i * 0.08 }}
+                            className="border-t border-slate-800 py-5 flex items-center justify-between group hover:border-slate-700 transition-colors"
+                        >
+                            <span className="text-white font-medium text-sm">{l.lang}</span>
+                            <span className="text-slate-600 text-xs">{l.level}</span>
+                        </motion.div>
+                    ))}
+                    <div className="border-t border-slate-800" />
                 </div>
             </div>
         </section>

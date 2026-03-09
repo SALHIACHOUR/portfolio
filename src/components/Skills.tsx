@@ -1,54 +1,60 @@
 "use client";
+
 import { motion } from "framer-motion";
 import { portfolioData } from "@/data/portfolio";
 
 const colorMap: Record<string, string> = {
-    blue: "bg-blue-500/10 text-blue-400 border-blue-500/20",
-    purple: "bg-purple-500/10 text-purple-400 border-purple-500/20",
-    green: "bg-green-500/10 text-green-400 border-green-500/20",
-    orange: "bg-orange-500/10 text-orange-400 border-orange-500/20",
-    red: "bg-red-500/10 text-red-400 border-red-500/20",
-    yellow: "bg-yellow-500/10 text-yellow-400 border-yellow-500/20",
+    blue:   "text-blue-400 border-blue-500/20 bg-blue-500/5",
+    purple: "text-purple-400 border-purple-500/20 bg-purple-500/5",
+    green:  "text-green-400 border-green-500/20 bg-green-500/5",
+    orange: "text-orange-400 border-orange-500/20 bg-orange-500/5",
+    red:    "text-red-400 border-red-500/20 bg-red-500/5",
+    yellow: "text-yellow-400 border-yellow-500/20 bg-yellow-500/5",
 };
 
 export default function Skills() {
     return (
-        <section id="skills" className="py-24 px-6">
-            <div className="max-w-6xl mx-auto">
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.5 }}
-                >
-                    <h2 className="text-3xl font-bold text-white mb-2">Compétences</h2>
-                    <div className="w-12 h-1 bg-blue-500 rounded mb-12" />
-                </motion.div>
+        <section id="skills" className="px-6 md:px-16 py-24 max-w-7xl mx-auto">
+            {/* Header */}
+            <motion.h2
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                className="text-slate-500 text-sm tracking-widest uppercase font-medium mb-4"
+            >
+                Stack technique
+            </motion.h2>
 
-                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {portfolioData.skills.map((group, i) => (
-                        <motion.div
-                            key={group.category}
-                            initial={{ opacity: 0, y: 20 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ delay: i * 0.1, duration: 0.5 }}
-                            className="bg-slate-900 border border-slate-800 rounded-2xl p-6 hover:border-slate-700 transition-colors"
-                        >
-                            <h3 className="text-white font-semibold mb-4">{group.category}</h3>
-                            <div className="flex flex-wrap gap-2">
-                                {group.items.map((item) => (
-                                    <span
-                                        key={item}
-                                        className={`text-xs px-3 py-1 rounded-full border ${colorMap[group.color]}`}
-                                    >
-                    {item}
-                  </span>
-                                ))}
-                            </div>
-                        </motion.div>
-                    ))}
-                </div>
+            {/* Skills grid rows */}
+            <div>
+                {portfolioData.skills.map((group, i) => (
+                    <motion.div
+                        key={group.category}
+                        initial={{ opacity: 0, y: 15 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: i * 0.08, duration: 0.5 }}
+                        className="border-t border-slate-800 py-6 flex flex-col md:flex-row md:items-center gap-4 md:gap-16 group hover:border-slate-700 transition-colors"
+                    >
+                        {/* Category label */}
+                        <span className="text-slate-600 text-xs uppercase tracking-widest font-medium w-32 shrink-0 group-hover:text-slate-400 transition-colors">
+              {group.category}
+            </span>
+
+                        {/* Tags */}
+                        <div className="flex flex-wrap gap-2">
+                            {group.items.map((item) => (
+                                <span
+                                    key={item}
+                                    className={`text-xs px-3 py-1.5 rounded-full border ${colorMap[group.color]} transition-all hover:scale-105`}
+                                >
+                  {item}
+                </span>
+                            ))}
+                        </div>
+                    </motion.div>
+                ))}
+                <div className="border-t border-slate-800" />
             </div>
         </section>
     );

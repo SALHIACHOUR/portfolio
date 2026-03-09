@@ -2,9 +2,11 @@
 
 import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
-import { portfolioData } from "@/data/portfolio";
+import { getTranslations } from "@/data/translations";
+import type { Locale } from "@/data/translations";
 
-export default function Experience() {
+export default function Experience({ lang }: { lang: Locale }) {
+    const { portfolio, ui } = getTranslations(lang);
     return (
         <section id="experience" className="px-6 md:px-16 py-24 max-w-7xl mx-auto">
             {/* Section header */}
@@ -15,16 +17,16 @@ export default function Experience() {
                 className="flex items-end justify-between mb-4"
             >
                 <h2 className="text-slate-500 text-sm tracking-widest uppercase font-medium">
-                    Expérience professionnelle
+                    {ui.sectionExperience}
                 </h2>
                 <span className="text-slate-700 text-sm font-mono">
-          {String(portfolioData.experiences.length).padStart(2, "0")}
+          {String(portfolio.experiences.length).padStart(2, "0")}
         </span>
             </motion.div>
 
             {/* Experience list */}
             <div>
-                {portfolioData.experiences.map((exp, i) => (
+                {portfolio.experiences.map((exp, i) => (
                     <motion.div
                         key={i}
                         initial={{ opacity: 0, y: 20 }}

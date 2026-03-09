@@ -2,7 +2,8 @@
 
 import { motion } from "framer-motion";
 import { ArrowUpRight, Github, Linkedin } from "lucide-react";
-import { portfolioData } from "@/data/portfolio";
+import { getTranslations } from "@/data/translations";
+import type { Locale } from "@/data/translations";
 
 const sentence = {
     hidden: { opacity: 0 },
@@ -12,15 +13,11 @@ const sentence = {
     },
 };
 
-const word = {
-    hidden: { opacity: 0, y: 40 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } },
-};
-
-const words = ["I", "build", "backend", "systems", "that", "scale."];
-
-export default function Hero() {
-    const { name, email, linkedin, github } = portfolioData;
+export default function Hero({ lang }: { lang: Locale }) {
+    const { portfolio, ui } = getTranslations(lang);
+    const { name, email, linkedin, github } = portfolio;
+    const words = ui.heroHeadline;
+    const highlightWords = ["backend", "scale."];
 
     return (
         <section
@@ -29,17 +26,15 @@ export default function Hero() {
         >
             {/* Top block */}
             <div className="flex items-start justify-between">
-                {/* Left — label */}
                 <motion.p
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.5 }}
                     className="text-slate-500 text-sm tracking-widest uppercase font-medium"
                 >
-                    Senior Java & Cloud Engineer
+                    {ui.heroTagline}
                 </motion.p>
 
-                {/* Right — availability badge */}
                 <motion.div
                     initial={{ opacity: 0, x: 20 }}
                     animate={{ opacity: 1, x: 0 }}
@@ -47,7 +42,7 @@ export default function Hero() {
                     className="flex items-center gap-2 text-sm text-slate-400 border border-slate-800 rounded-full px-4 py-2"
                 >
                     <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
-                    Open to work
+                    {ui.heroOpenToWork}
                 </motion.div>
             </div>
 
@@ -70,7 +65,7 @@ export default function Hero() {
                                 delay: 0.3 + i * 0.08,
                             }}
                             className={`inline-block mr-[0.25em] ${
-                                w === "backend" || w === "scale."
+                                highlightWords.some((hw) => w.toLowerCase().includes(hw))
                                     ? "text-blue-400"
                                     : "text-white"
                             }`}
@@ -80,21 +75,17 @@ export default function Hero() {
                     ))}
                 </motion.h1>
 
-                {/* Sub line */}
                 <motion.p
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 1, duration: 0.6 }}
                     className="text-slate-500 text-lg md:text-xl mt-8 max-w-xl leading-relaxed"
                 >
-                    Java · Spring Boot · Microservices · Cloud · CI/CD
+                    {ui.heroSubline}
                     <br />
-                    <span className="text-slate-600 text-base">
-            4+ ans d&apos;expérience en production — Casablanca, Maroc
-          </span>
+                    <span className="text-slate-600 text-base">{ui.heroSublineLocation}</span>
                 </motion.p>
 
-                {/* CTAs */}
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
@@ -105,7 +96,7 @@ export default function Hero() {
                         href="#projects"
                         className="group flex items-center gap-2 bg-white text-slate-950 font-semibold px-6 py-3 rounded-full hover:bg-blue-400 transition-all duration-300"
                     >
-                        Voir mes projets
+                        {ui.heroSeeProjects}
                         <ArrowUpRight
                             size={18}
                             className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"
@@ -115,7 +106,7 @@ export default function Hero() {
                         href={`mailto:${email}`}
                         className="flex items-center gap-2 border border-slate-700 text-slate-400 hover:text-white hover:border-slate-500 font-medium px-6 py-3 rounded-full transition-all duration-300"
                     >
-                        Me contacter
+                        {ui.heroContactMe}
                     </a>
                 </motion.div>
             </div>
@@ -127,10 +118,8 @@ export default function Hero() {
                 transition={{ delay: 1.5, duration: 0.8 }}
                 className="flex items-center justify-between mt-16 pt-6 border-t border-slate-800"
             >
-                {/* Name */}
                 <p className="text-slate-600 text-sm font-medium">{name}</p>
 
-                {/* Social links */}
                 <div className="flex items-center gap-6">
                     <a
                         href={linkedin}
@@ -150,13 +139,12 @@ export default function Hero() {
                     </a>
                 </div>
 
-                {/* Scroll hint */}
                 <motion.div
                     animate={{ y: [0, 6, 0] }}
                     transition={{ repeat: Infinity, duration: 1.5 }}
                     className="text-slate-700 text-sm hidden md:block"
                 >
-                    scroll ↓
+                    {ui.heroScroll}
                 </motion.div>
             </motion.div>
         </section>

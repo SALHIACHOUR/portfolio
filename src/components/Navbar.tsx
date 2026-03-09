@@ -2,15 +2,17 @@
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { portfolioData } from "@/data/portfolio";
+import { getTranslations } from "@/data/translations";
+import LangSwitcher from "./LangSwitcher";
+import type { Locale } from "@/data/translations";
 
-const links = [
-    { label: "Work", href: "#projects" },
-    { label: "About", href: "#experience" },
-    { label: "Contact", href: "#contact" },
-];
-
-export default function Navbar() {
+export default function Navbar({ lang }: { lang: Locale }) {
+    const { portfolio, ui } = getTranslations(lang);
+    const links = [
+        { label: ui.navWork, href: "#projects" },
+        { label: ui.navAbout, href: "#experience" },
+        { label: ui.navContact, href: "#contact" },
+    ];
     const [scrolled, setScrolled] = useState(false);
     const [menuOpen, setMenuOpen] = useState(false);
 
@@ -32,10 +34,10 @@ export default function Navbar() {
                 <div className="max-w-7xl mx-auto px-6 md:px-16 py-5 flex items-center justify-between">
                     {/* Logo */}
                     <a
-                        href="#"
+                        href={`/${lang}`}
                         className="text-white font-bold text-lg tracking-tight hover:text-blue-400 transition-colors"
                     >
-                        {portfolioData.name.split(" ").map(w => w[0]).join("")}
+                        {portfolio.name.split(" ").map(w => w[0]).join("")}
                         <span className="text-blue-400">.</span>
                     </a>
 
@@ -53,13 +55,14 @@ export default function Navbar() {
                         ))}
                     </ul>
 
-                    {/* CTA */}
+                    {/* CTA + Lang switcher */}
                     <div className="hidden md:flex items-center gap-4">
+                        <LangSwitcher currentLang={lang} />
                         <a
-                            href={`mailto:${portfolioData.email}`}
+                            href={`mailto:${portfolio.email}`}
                             className="group flex items-center gap-1.5 bg-white text-slate-950 text-sm font-semibold px-5 py-2.5 rounded-full hover:bg-blue-400 transition-all duration-300"
                         >
-                            Hire me
+                            {ui.navHireMe}
                             <span className="group-hover:translate-x-0.5 transition-transform">→</span>
                         </a>
                     </div>
@@ -97,12 +100,15 @@ export default function Navbar() {
                                 {l.label}
                             </a>
                         ))}
+                        <div className="flex mt-4" onClick={(e) => e.stopPropagation()}>
+                            <LangSwitcher currentLang={lang} />
+                        </div>
                         <a
-                            href={`mailto:${portfolioData.email}`}
+                            href={`mailto:${portfolio.email}`}
                             className="text-slate-500 text-sm mt-4"
                             onClick={() => setMenuOpen(false)}
                         >
-                            {portfolioData.email}
+                            {portfolio.email}
                         </a>
                     </motion.div>
                 )}

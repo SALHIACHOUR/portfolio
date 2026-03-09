@@ -2,9 +2,11 @@
 
 import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
-import { portfolioData } from "@/data/portfolio";
+import { getTranslations } from "@/data/translations";
+import type { Locale } from "@/data/translations";
 
-export default function Projects() {
+export default function Projects({ lang }: { lang: Locale }) {
+    const { portfolio, ui } = getTranslations(lang);
     return (
         <section id="projects" className="px-6 md:px-16 py-24 max-w-7xl mx-auto">
             {/* Section header */}
@@ -15,16 +17,16 @@ export default function Projects() {
                 className="flex items-end justify-between mb-4"
             >
                 <h2 className="text-slate-500 text-sm tracking-widest uppercase font-medium">
-                    Projets sélectionnés
+                    {ui.sectionProjects}
                 </h2>
                 <span className="text-slate-700 text-sm font-mono">
-          {String(portfolioData.projects.length).padStart(2, "0")}
+          {String(portfolio.projects.length).padStart(2, "0")}
         </span>
             </motion.div>
 
             {/* Projects list */}
             <div>
-                {portfolioData.projects.map((project, i) => (
+                {portfolio.projects.map((project, i) => (
                     <motion.div
                         key={i}
                         initial={{ opacity: 0, y: 20 }}

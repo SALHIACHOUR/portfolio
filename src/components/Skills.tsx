@@ -1,7 +1,8 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { portfolioData } from "@/data/portfolio";
+import { getTranslations } from "@/data/translations";
+import type { Locale } from "@/data/translations";
 
 const colorMap: Record<string, string> = {
     blue:   "text-blue-400 border-blue-500/20 bg-blue-500/5",
@@ -12,7 +13,8 @@ const colorMap: Record<string, string> = {
     yellow: "text-yellow-400 border-yellow-500/20 bg-yellow-500/5",
 };
 
-export default function Skills() {
+export default function Skills({ lang }: { lang: Locale }) {
+    const { portfolio, ui } = getTranslations(lang);
     return (
         <section id="skills" className="px-6 md:px-16 py-24 max-w-7xl mx-auto">
             {/* Header */}
@@ -22,12 +24,12 @@ export default function Skills() {
                 viewport={{ once: true }}
                 className="text-slate-500 text-sm tracking-widest uppercase font-medium mb-4"
             >
-                Stack technique
+                {ui.sectionSkills}
             </motion.h2>
 
             {/* Skills grid rows */}
             <div>
-                {portfolioData.skills.map((group, i) => (
+                {portfolio.skills.map((group, i) => (
                     <motion.div
                         key={group.category}
                         initial={{ opacity: 0, y: 15 }}

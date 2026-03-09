@@ -1,25 +1,6 @@
-import Navbar from "@/components/Navbar";
-import Hero from "@/components/Hero";
-import Stats from "@/components/Stats";
-import Projects from "@/components/Projects";
-import Experience from "@/components/Experience";
-import Skills from "@/components/Skills";
-import Education from "@/components/Education";
-import Contact from "@/components/Contact";
+import { redirect } from "next/navigation";
+import { defaultLocale } from "@/data/translations";
 
 export default function Home() {
-    return (
-        <>
-            <Navbar />
-            <main>
-                <Hero />
-                <Stats />
-                <Projects />
-                <Experience />
-                <Skills />
-                <Education />
-                <Contact />
-            </main>
-        </>
-    );
+    redirect(`/${defaultLocale}`);
 }

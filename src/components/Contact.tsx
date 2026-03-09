@@ -2,10 +2,12 @@
 
 import { motion } from "framer-motion";
 import { ArrowUpRight, Github, Linkedin, Mail, Phone } from "lucide-react";
-import { portfolioData } from "@/data/portfolio";
+import { getTranslations } from "@/data/translations";
+import type { Locale } from "@/data/translations";
 
-export default function Contact() {
-    const { email, phone, linkedin, github, name } = portfolioData;
+export default function Contact({ lang }: { lang: Locale }) {
+    const { portfolio, ui } = getTranslations(lang);
+    const { email, phone, linkedin, github, name } = portfolio;
 
     return (
         <section id="contact" className="px-6 md:px-16 py-24 max-w-7xl mx-auto">
@@ -18,12 +20,12 @@ export default function Contact() {
                 className="border-t border-slate-800 pt-16 pb-20"
             >
                 <p className="text-slate-500 text-sm tracking-widest uppercase font-medium mb-8">
-                    Contact
+                    {ui.sectionContact}
                 </p>
 
                 <h2 className="text-[clamp(2.5rem,7vw,6rem)] font-bold text-white leading-tight mb-10 max-w-4xl">
-                    Vous avez un projet ?<br />
-                    <span className="text-blue-400">Travaillons ensemble.</span>
+                    {ui.contactHeadline}<br />
+                    <span className="text-blue-400">{ui.contactSubline}</span>
                 </h2>
 
                 <a
@@ -50,7 +52,7 @@ export default function Contact() {
                 <div>
                     <p className="text-white font-semibold">{name}</p>
                     <p className="text-slate-600 text-sm mt-1">
-                        © {new Date().getFullYear()} — Built with Next.js & Tailwind CSS
+                        {ui.contactFooter.replace("{year}", String(new Date().getFullYear()))}
                     </p>
                 </div>
 

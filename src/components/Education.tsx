@@ -1,9 +1,11 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { portfolioData } from "@/data/portfolio";
+import { getTranslations } from "@/data/translations";
+import type { Locale } from "@/data/translations";
 
-export default function Education() {
+export default function Education({ lang }: { lang: Locale }) {
+    const { portfolio, ui } = getTranslations(lang);
     return (
         <section id="education" className="px-6 md:px-16 py-24 max-w-7xl mx-auto">
             <div className="grid md:grid-cols-2 gap-16">
@@ -16,10 +18,10 @@ export default function Education() {
                         viewport={{ once: true }}
                         className="text-slate-500 text-sm tracking-widest uppercase font-medium mb-4"
                     >
-                        Formation
+                        {ui.sectionEducation}
                     </motion.h2>
 
-                    {portfolioData.education.map((edu, i) => (
+                    {portfolio.education.map((edu, i) => (
                         <motion.div
                             key={i}
                             initial={{ opacity: 0, y: 15 }}
@@ -48,10 +50,10 @@ export default function Education() {
                         viewport={{ once: true }}
                         className="text-slate-500 text-sm tracking-widest uppercase font-medium mb-4"
                     >
-                        Certifications
+                        {ui.sectionCertifications}
                     </motion.h2>
 
-                    {portfolioData.certifications.map((cert, i) => (
+                    {portfolio.certifications.map((cert, i) => (
                         <motion.div
                             key={i}
                             initial={{ opacity: 0, y: 15 }}
@@ -77,10 +79,10 @@ export default function Education() {
                         viewport={{ once: true }}
                         className="text-slate-500 text-sm tracking-widest uppercase font-medium mb-4"
                     >
-                        Langues
+                        {ui.sectionLanguages}
                     </motion.h2>
 
-                    {portfolioData.languages.map((l, i) => (
+                    {portfolio.languages.map((l, i) => (
                         <motion.div
                             key={i}
                             initial={{ opacity: 0, y: 10 }}

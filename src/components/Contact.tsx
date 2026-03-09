@@ -71,7 +71,7 @@ export default function Contact() {
                     </div>
 
                     <p className="text-slate-600 text-sm">
-                        © 2026 Achour Salhi — Built with Next.js & Tailwind CSS
+                        © 2026 Achour Salhi - Built with Next.js & Tailwind CSS
                     </p>
                 </motion.div>
             </div>

@@ -108,12 +108,12 @@ export const portfolioData = {
     education: [
         {
             degree: "Ingénieur en Informatique",
-            school: "ENSIAS — École Nationale Supérieure d'Informatique et d'Analyse des Systèmes",
+            school: "ENSIAS - École Nationale Supérieure d'Informatique et d'Analyse des Systèmes",
             period: "09/2018 – 06/2021",
             location: "Rabat, Maroc",
         },
         {
-            degree: "Classes Préparatoires aux Grandes Écoles — Option MP",
+            degree: "Classes Préparatoires aux Grandes Écoles - Option MP",
             school: "Lycée Ibn Timiya",
             period: "09/2016 – 06/2018",
             location: "Marrakech, Maroc",
@@ -123,7 +123,7 @@ export const portfolioData = {
     certifications: [
         "Building Web Applications with Java Spring Boot",
         "Intelligence Artificielle & IA Générative",
-        "Big Data Engineer — Mastery Award 2021",
+        "Big Data Engineer - Mastery Award 2021",
     ],
 
     languages: [

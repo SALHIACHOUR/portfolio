@@ -5,7 +5,7 @@ import "./globals.css";
 const geist = Geist({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-    title: "Achour Salhi — Senior Java & Cloud Engineer",
+    title: "Achour Salhi - Senior Java & Cloud Engineer",
     description:
         "Portfolio de Achour Salhi, Senior Java Software & Cloud Engineer spécialisé en Spring Boot, microservices et CI/CD.",
     keywords: ["Java", "Spring Boot", "Microservices", "Cloud", "Backend Engineer"],
